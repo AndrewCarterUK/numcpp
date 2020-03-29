@@ -1,12 +1,14 @@
+#include <numcpp/explicit_instantiate.h>
 #include <numcpp/ndarray.h>
+#include <numcpp/shape.h>
 
 #include <cstring>
 #include <stdexcept>
 
 namespace numcpp {
     template<typename T>
-    ndarray<T>::ndarray(T * const v, const shape &s, bool delete_on_destruct) :
-        m_data{ v },
+    ndarray<T>::ndarray(T * const data, const shape &s, bool delete_on_destruct) :
+        m_data{ data },
         m_shape{ s },
         m_delete_on_destruct{ delete_on_destruct }
     { }
@@ -44,7 +46,7 @@ namespace numcpp {
             throw std::logic_error("Assignment is invalid on array of different shape");
         }
 
-        std::memcpy(m_data, v.m_data, m_shape.size() * sizeof(T));
+        std::memmove(m_data, v.m_data, m_shape.size() * sizeof(T));
 
         return *this;
     }
@@ -61,17 +63,5 @@ namespace numcpp {
         return ndarray<T>(v, sub_shape);
     }
 
-    template class ndarray<char>;
-    template class ndarray<unsigned char>;
-    template class ndarray<short>;
-    template class ndarray<unsigned short>;
-    template class ndarray<int>;
-    template class ndarray<unsigned int>;
-    template class ndarray<long>;
-    template class ndarray<unsigned long>;
-    template class ndarray<long long>;
-    template class ndarray<unsigned long long>;
-    template class ndarray<float>;
-    template class ndarray<double>;
-    template class ndarray<long double>;
+    NUMCPP_EXPLICIT_INSTANTIATE_CLASS(ndarray);
 }

@@ -11,7 +11,7 @@ namespace numcpp {
             T * const m_data;
             const shape m_shape;
 
-            ndarray(T * const v, const shape &s, bool delete_on_destruct = false);
+            ndarray(T * const data, const shape &s, bool delete_on_destruct = false);
             ~ndarray();
 
             // Overload implicit cast to scalar

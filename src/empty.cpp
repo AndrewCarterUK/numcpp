@@ -4,13 +4,13 @@
 
 namespace numcpp {
     template<typename T>
-    ndarray<T> numcpp<T>::zeros(int n) {
-        return zeros(shape{ n });
+    ndarray<T> numcpp<T>::empty(int n) {
+        return empty(shape{ n });
     }
 
     template<typename T>
-    ndarray<T> numcpp<T>::zeros(const shape &s) {
-        return ndarray<T>{ new T[s.size()] {}, s, true };
+    ndarray<T> numcpp<T>::empty(const shape &s) {
+        return ndarray<T>{ new T[s.size()], s, true };
     }
 
     NUMCPP_EXPLICIT_INSTANTIATE_CLASS(numcpp);
