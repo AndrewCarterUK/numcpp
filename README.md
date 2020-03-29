@@ -1,6 +1,6 @@
 # numcpp
 
-![C++ Test](https://github.com/AndrewCarterUK/numcpp/workflows/C++%20Test/badge.svg)
+[![C++ Test](https://github.com/AndrewCarterUK/numcpp/workflows/C++%20Test/badge.svg)](https://github.com/AndrewCarterUK/numcpp/actions?query=workflow%3A%22C%2B%2B+Test%22)
 
 A C++ library with a [numpy](https://numpy.org/) like interface for handling large, multi-dimensional arrays and matrices
 
