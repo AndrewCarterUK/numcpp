@@ -1,4 +1,4 @@
-#include <shape.h>
+#include <numcpp/shape.h>
 
 #include <functional>
 #include <initializer_list>

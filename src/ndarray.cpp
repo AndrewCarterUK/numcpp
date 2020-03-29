@@ -1,5 +1,5 @@
-#include <ndarray.h>
-#include <shape.h>
+#include <numcpp/ndarray.h>
+#include <numcpp/shape.h>
 
 #include <cstring>
 #include <stdexcept>
@@ -64,12 +64,26 @@ namespace numcpp {
 
     template<class T>
     ndarray<T> ndarray<T>::zeros(int n) {
-        ndarray<T> result{ new T[n] {}, shape{ n }, true };
-        return result;
+        return ndarray<T>{ new T[n] {}, shape{ n }, true };
     }
 
     template<class T>
     ndarray<T> ndarray<T>::zeros(const shape &s) {
-        ndarray<T> result{ new T[s.size()] {}, s, true };
+        return ndarray<T>{ new T[s.size()] {}, s, true };
     }
+
+    // Explicit instantiations
+    template class ndarray<char>;
+    template class ndarray<unsigned char>;
+    template class ndarray<short>;
+    template class ndarray<unsigned short>;
+    template class ndarray<int>;
+    template class ndarray<unsigned int>;
+    template class ndarray<long>;
+    template class ndarray<unsigned long>;
+    template class ndarray<long long>;
+    template class ndarray<unsigned long long>;
+    template class ndarray<float>;
+    template class ndarray<double>;
+    template class ndarray<long double>;
 }

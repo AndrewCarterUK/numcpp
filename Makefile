@@ -1,30 +1,56 @@
 CXX = g++
 
+BLDDIR = build
+
+# Library Path Definitions
 INCDIR = include
 OBJDIR = obj
 SRCDIR = src
-BLDDIR = build
+SRCFILES = $(wildcard $(SRCDIR)/*.cpp)
+OBJFILES = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCFILES))
+TARGET = $(BLDDIR)/numcpp.a
 
+# Library Compiler Definitinos
 CXXFLAGS = -std=c++17 -Wall -Wextra -I$(INCDIR) -g
 LIBS = 
 
-SRCFILES = $(wildcard $(SRCDIR)/*.cpp)
-OBJFILES = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCFILES))
+# Test Path Definitions
+TEST_INCDIR = test/include
+TEST_OBJDIR = test/obj
+TEST_SRCDIR = test/src
+TEST_SRCFILES = $(wildcard $(TEST_SRCDIR)/*.cpp)
+TEST_OBJFILES = $(patsubst $(TEST_SRCDIR)/%.cpp,$(TEST_OBJDIR)/%.o,$(TEST_SRCFILES))
+TEST_TARGET = $(BLDDIR)/test
+TEST_TARGETSRC = test/test.cpp
 
-TARGET = $(BLDDIR)/main
-TARGETSRC = main.cpp
+# Test Compiler Definitions
+TEST_CXXFLAGS = $(CXXFLAGS) -I$(TEST_INCDIR)
+TEST_LIBS = $(LIBS)
 
-all: $(TARGET)
-
-cleanall: clean $(TARGET)
+# Library Build Instructions
+all: $(TARGET) $(TEST_TARGET)
+cleanall: clean all
 
 $(TARGET): $(TARGETSRC) $(OBJFILES)
-	$(CXX) $(CXXFLAGS) $^ $(LIBS) -o $@
+	$(CXX) $(CXXFLAGS) -shared -fPIC $^ $(LIBS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< $(LIBS) -o $@ 
+	$(CXX) $(CXXFLAGS) -fPIC -c $< $(LIBS) -o $@ 
 
 .PHONY: clean
 
-clean:
+clean: testclean
 	rm -f $(OBJDIR)/*.o $(TARGET)
+
+# Test Build Instructions
+test: $(TEST_TARGET)
+testcleantest: testclean test
+
+$(TEST_TARGET): $(TEST_TARGETSRC) $(TEST_OBJFILES) $(TARGET)
+	$(CXX) $(TEST_CXXFLAGS) $^ $(TEST_LIBS) -o $@
+
+$(TEST_OBJDIR)/%.o: $(TEST_SRCDIR)/%.cpp
+	$(CXX) $(TEST_CXXFLAGS) -c $< $(TEST_LIBS) -o $@ 
+
+testclean:
+	rm -f $(TEST_OBJDIR)/*.o $(TEST_TARGET)
