@@ -1,6 +1,6 @@
 # numcpp
 
-[![C++ Test](https://github.com/AndrewCarterUK/numcpp/workflows/C++%20Test/badge.svg)](https://github.com/AndrewCarterUK/numcpp/actions?query=workflow%3A%22C%2B%2B+Test%22)
+[![C++ Test](https://github.com/AndrewCarterUK/numcpp/workflows/C++%20Test/badge.svg)](https://github.com/AndrewCarterUK/numcpp/actions?query=workflow%3A%22C%2B%2B+Test%22+branch%3Amaster)
 
 A C++ library with a [numpy](https://numpy.org/) like interface for handling large, multi-dimensional arrays and matrices
 
@@ -47,3 +47,30 @@ Other available types include:
 | `nc::full({ n1, n2, ... }, double v)` | Create a multi dimensional array of shape `{ n1, n2, ... }` initialised to `v` |
 | `nc::eye(int N, int M = 0, int k = 0)` | Create a two dimensional array with ones on the diagonal and zeros elsewhere (`M` is number of columns and `k` is the index of the diagonal) |
 | `nc::identity(int n)` | Create a two dimensional (square) array with ones on the main diagonal and zeros elsewhere |
+
+### Examples
+
+```cpp
+#include <iostream>
+#include <numcpp.h>
+
+using nc = numcpp::numcpp<double>;
+
+int main()
+{
+    auto m{ nc::identity(5) };
+
+    std::cout << m.as_string() << '\n';
+
+    /* Prints:
+    [
+      [1.00000, 0.00000, 0.00000, 0.00000, 0.00000], 
+      [0.00000, 1.00000, 0.00000, 0.00000, 0.00000], 
+      [0.00000, 0.00000, 1.00000, 0.00000, 0.00000], 
+      [0.00000, 0.00000, 0.00000, 1.00000, 0.00000], 
+      [0.00000, 0.00000, 0.00000, 0.00000, 1.00000], 
+    ] */
+
+    return 0;
+}
+```

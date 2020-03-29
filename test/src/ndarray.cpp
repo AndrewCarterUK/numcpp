@@ -72,5 +72,27 @@ TEST_CASE( "numcpp::ndarray::as_string() scalar", "numcpp::ndarray" ) {
     double data[] = { 1.1 };
     numcpp::ndarray a{ data, numcpp::shape{ }};
 
-    REQUIRE( a.as_string() == std::to_string(1.1) );
+    REQUIRE( a.as_string() == "1.100000" );
 }
+
+/* TEST_CASE( "numcpp::ndarray::as_string() 1D", "numcpp::ndarray" ) {
+    double data[] = { 1.1, 2.2, 3.3 };
+    numcpp::ndarray a{ data, numcpp::shape{ 3 }};
+
+    REQUIRE( a.as_string() == "[1.100000, 2.200000, 3.300000]" );
+}
+
+TEST_CASE( "numcpp::ndarray::as_string() 2D", "numcpp::ndarray" ) {
+    double data[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
+    numcpp::ndarray a{ data, numcpp::shape{ 3, 3 }};
+
+    std::string expected{ 
+        "[\n"
+        "  [1.000000, 0.000000, 0.000000],\n"
+        "  [0.000000, 1.000000, 0.000000],\n"
+        "  [0.000000, 0.000000, 1.000000]\n"
+        "]"
+    };
+
+    REQUIRE( a.as_string() == expected );
+} */
