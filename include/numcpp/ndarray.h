@@ -3,6 +3,8 @@
 
 #include "shape.h"
 
+#include <string>
+
 namespace numcpp {
     template <typename T = double> 
     class ndarray
@@ -26,6 +28,8 @@ namespace numcpp {
             // Overload index subscript lookup
             ndarray<T> operator[] (int index);
 
+            // Return a string representation of the array (useful for debugging)
+            std::string as_string();
         private:
             bool m_delete_on_destruct;
     };

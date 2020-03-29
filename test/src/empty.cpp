@@ -4,16 +4,17 @@
 #include <numcpp/numcpp.h>
 #include <vector>
 
+using nc = numcpp::numcpp<>;
+
 TEST_CASE( "numcpp::empty() for one dimensional array", "numcpp::empty" ) {
-    auto a{ numcpp::numcpp<double>::empty(3) };
+    auto a{ nc::empty(3) };
 
     REQUIRE( a.m_shape.size() == 3 );
     REQUIRE( a.m_shape.dimensions() == std::vector<int>{ 3 } );
 }
 
 TEST_CASE( "numcpp::empty() for multi dimensional array", "numcpp::empty" ) {
-    auto s{ numcpp::shape{ 3, 3, 3 } };
-    auto a{ numcpp::numcpp<double>::empty(s) };
+    auto a{ nc::empty({ 3, 3, 3 }) };
 
-    REQUIRE( a.m_shape == s );
+    REQUIRE( a.m_shape.size() == 27 );
 }

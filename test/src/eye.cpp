@@ -4,8 +4,10 @@
 #include <numcpp/numcpp.h>
 #include <vector>
 
+using nc = numcpp::numcpp<>;
+
 TEST_CASE( "numcpp::eye()", "numcpp::eye" ) {
-    auto a{ numcpp::numcpp<double>::eye(3, 4, -1) };
+    auto a{ nc::eye(3, 4, -1) };
 
     REQUIRE( a[0][0] == 0 );
     REQUIRE( a[0][1] == 0 );
@@ -25,7 +27,7 @@ TEST_CASE( "numcpp::eye()", "numcpp::eye" ) {
     REQUIRE( a.m_shape.size() == 12 );
     REQUIRE( a.m_shape.dimensions() == std::vector<int>{ 3, 4 } );
 
-    auto b{ numcpp::numcpp<double>::eye(3, 4, 1) };
+    auto b{ nc::eye(3, 4, 1) };
 
     REQUIRE( b[0][0] == 0 );
     REQUIRE( b[0][1] == 1 );

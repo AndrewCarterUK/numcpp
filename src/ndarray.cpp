@@ -69,5 +69,16 @@ namespace numcpp {
         return ndarray<T>(v, sub_shape);
     }
 
+    template<typename T>
+    std::string ndarray<T>::as_string() {
+        int dimensions = m_shape.dimensions().size();
+
+        if (dimensions == 0) {
+            return std::to_string(m_data[0]);
+        }
+
+        return std::string{ "" };
+    }
+
     NUMCPP_EXPLICIT_INSTANTIATE_CLASS(ndarray);
 }

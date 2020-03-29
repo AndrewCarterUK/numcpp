@@ -3,11 +3,17 @@
 #include <numcpp/shape.h>
 
 #include <algorithm>
+#include <initializer_list>
 
 namespace numcpp {
     template<typename T>
     ndarray<T> numcpp<T>::full(int n, T v) {
         return full(shape{ n }, v);
+    }
+
+    template<typename T>
+    ndarray<T> numcpp<T>::full(std::initializer_list<int> dimensions, T v) {
+        return full(shape{ dimensions }, v);
     }
 
     template<typename T>

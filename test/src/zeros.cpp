@@ -4,8 +4,10 @@
 #include <numcpp/numcpp.h>
 #include <vector>
 
+using nc = numcpp::numcpp<>;
+
 TEST_CASE( "numcpp::zeros() for one dimensional array", "numcpp::zeros" ) {
-    auto a{ numcpp::numcpp<double>::zeros(3) };
+    auto a{ nc::zeros(3) };
 
     REQUIRE( a[0] == 0 );
     REQUIRE( a[1] == 0 );
@@ -16,11 +18,10 @@ TEST_CASE( "numcpp::zeros() for one dimensional array", "numcpp::zeros" ) {
 }
 
 TEST_CASE( "numcpp::zeros() for multi dimensional array", "numcpp::zeros" ) {
-    auto s{ numcpp::shape{ 3, 3, 3 } };
-    auto a{ numcpp::numcpp<double>::zeros(s) };
+    auto a{ nc::zeros({ 3, 3, 3 }) };
 
     REQUIRE( a[0][0][0] == 0 );
     REQUIRE( a[2][2][2] == 0 );
 
-    REQUIRE( a.m_shape == s );
+    REQUIRE( a.m_shape.size() == 27 );
 }
