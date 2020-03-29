@@ -24,7 +24,7 @@ namespace numcpp {
 
             int size() const;
 
-            std::vector<int> dimensions();
+            const std::vector<int> dimensions() const;
 
         private:
             const std::vector<int> m_dimensions;

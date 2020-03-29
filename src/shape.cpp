@@ -41,7 +41,7 @@ namespace numcpp {
         return m_size;
     }
 
-    std::vector<int> shape::dimensions() {
+    const std::vector<int> shape::dimensions() const {
         return m_dimensions;
     }
 }

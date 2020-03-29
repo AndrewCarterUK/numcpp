@@ -4,7 +4,7 @@
 #include "shape.h"
 
 namespace numcpp {
-    template <class T = double> 
+    template <typename T = double> 
     class ndarray
     {
         public:
@@ -25,10 +25,6 @@ namespace numcpp {
 
             // Overload index subscript lookup
             ndarray<T> operator[] (int index);
-
-            // Factory method for array of zeroes
-            static ndarray<T> zeros(int n);
-            static ndarray<T> zeros(const shape &s);
 
         private:
             bool m_delete_on_destruct;
