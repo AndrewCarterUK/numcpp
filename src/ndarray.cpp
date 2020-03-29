@@ -57,6 +57,12 @@ namespace numcpp {
             throw std::logic_error("Array operators are invalid on scalar type");
         }
 
+        if (index < 0) {
+            throw std::out_of_range("Negative indicies are out of bounds");
+        } else if (index >= m_shape.dimensions()[0]) {
+            throw std::out_of_range("Index is out of bounds");
+        }
+
         auto sub_shape = m_shape.sub();
         T * const v = m_data + (sub_shape.size() * index);
 

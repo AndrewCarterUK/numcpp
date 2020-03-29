@@ -48,3 +48,21 @@ TEST_CASE( "numcpp::ndarray::operator=(ndarray)", "numcpp::ndarray" ) {
 
     REQUIRE_THROWS_AS( a1 = a2, std::logic_error );
 }
+
+TEST_CASE( "numcpp::ndarray::operator[]", "numcpp::ndarray" ) {
+    double data[] = { 1.1, 2.2, 3.3, 4.4 };
+    numcpp::ndarray a{ data, numcpp::shape{ 2, 2 }};
+
+    REQUIRE( a[0][0] == 1.1 );
+    REQUIRE( a[0][1] == 2.2 );
+    REQUIRE( a[1][0] == 3.3 );
+    REQUIRE( a[1][1] == 4.4 );
+
+    REQUIRE_THROWS_AS( a[0][0][0], std::logic_error );
+
+    REQUIRE_THROWS_AS( a[-1][0], std::out_of_range );
+    REQUIRE_THROWS_AS( a[0][-1], std::out_of_range );
+    REQUIRE_THROWS_AS( a[2][-1], std::out_of_range );
+    REQUIRE_THROWS_AS( a[0][2], std::out_of_range );
+    REQUIRE_THROWS_AS( a[2][0], std::out_of_range );
+}
