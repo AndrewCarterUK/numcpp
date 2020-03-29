@@ -52,7 +52,7 @@ Other available types include:
 
 ```cpp
 #include <iostream>
-#include <numcpp.h>
+#include <numcpp/numcpp.h>
 
 using nc = numcpp::numcpp<double>;
 
