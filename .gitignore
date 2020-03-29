@@ -2,3 +2,4 @@
 obj/*.o
 test/obj/*.o
 build/*
+!build/.gitkeep
