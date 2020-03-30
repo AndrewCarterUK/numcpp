@@ -14,6 +14,12 @@ TARGET = $(BLDDIR)/numcpp.a
 CXXFLAGS = -std=c++17 -Wall -Wextra -I$(INCDIR) -g
 LIBS = 
 
+# Example Path Definitions
+EXAMPLE_SRCDIR = examples
+EXAMPLE_BLDDIR = build/examples
+EXAMPLE_SRCFILES = $(wildcard $(EXAMPLE_SRCDIR)/*.cpp)
+EXAMPLE_BINFILES = $(patsubst $(EXAMPLE_SRCDIR)/%.cpp,$(EXAMPLE_BLDDIR)/%,$(EXAMPLE_SRCFILES))
+
 # Test Path Definitions
 TEST_INCDIR = test/include
 TEST_OBJDIR = test/obj
@@ -41,6 +47,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 clean: testclean
 	rm -f $(OBJDIR)/*.o $(TARGET)
+
+# Example Build Instructions
+examples: $(EXAMPLE_BINFILES)
+
+$(EXAMPLE_BLDDIR)/%: $(EXAMPLE_SRCDIR)/%.cpp $(TARGET)
+	$(CXX) $(CXXFLAGS) $^ $(LIBS) -o $@
 
 # Test Build Instructions
 test: $(TEST_TARGET)

@@ -22,9 +22,15 @@ namespace numcpp {
 
             shape sub() const;
 
+            shape transpose() const;
+
             int size() const;
 
             const std::vector<int> dimensions() const;
+
+            int offset(const std::vector<int> indicies) const;
+
+            void advance(std::vector<int> &indicies) const;
 
         private:
             const std::vector<int> m_dimensions;

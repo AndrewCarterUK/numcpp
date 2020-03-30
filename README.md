@@ -48,6 +48,12 @@ Other available types include:
 | `nc::eye(int N, int M = 0, int k = 0)` | Create a two dimensional array with ones on the diagonal and zeros elsewhere (`M` is number of columns and `k` is the index of the diagonal) |
 | `nc::identity(int n)` | Create a two dimensional (square) array with ones on the main diagonal and zeros elsewhere |
 
+### Array Operations
+
+| Method | Description |
+| - | - |
+| `ndarray::transpose()` | Transpose an array |
+
 ### Examples
 
 ```cpp

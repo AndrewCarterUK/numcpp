@@ -1,5 +1,5 @@
+#include <numcpp.h>
 #include <numcpp/explicit_instantiate.h>
-#include <numcpp/numcpp.h>
 #include <numcpp/shape.h>
 
 #include <initializer_list>

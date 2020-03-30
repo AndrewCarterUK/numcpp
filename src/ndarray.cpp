@@ -1,7 +1,10 @@
+#include <numcpp.h>
 #include <numcpp/explicit_instantiate.h>
 #include <numcpp/ndarray.h>
 #include <numcpp/shape.h>
 
+#include <algorithm>
+#include <functional>
 #include <cstring>
 #include <stdexcept>
 
@@ -70,14 +73,64 @@ namespace numcpp {
     }
 
     template<typename T>
-    std::string ndarray<T>::as_string() {
-        int dimensions = m_shape.dimensions().size();
+    std::string ndarray<T>::as_string(int line_offset) {
+        auto line_padding{ std::string(line_offset, ' ') };
 
-        if (dimensions == 0) {
-            return std::to_string(m_data[0]);
+        auto dimensions{ m_shape.dimensions() };
+
+        if (dimensions.size() == 0) {
+            return line_padding + std::to_string(m_data[0]);
         }
 
-        return std::string{ "" };
+        int root_length = dimensions[0];
+
+        if (dimensions.size() == 1) {
+            std::string result = line_padding + "[";
+
+            for (int i = 0; i < root_length; i++) {
+                result += operator[](i).as_string();
+
+                if (i != root_length - 1) {
+                    result += ", ";
+                }
+            }
+
+            return result + "]";
+        }
+
+        std::string result = line_padding + "[\n";
+
+        for (int i = 0; i < root_length; i++) {
+            result += operator[](i).as_string(line_offset + 2);
+
+            if (i != root_length - 1) {
+                result += ",\n";
+            } else {
+                result += "\n";
+            }
+        }
+
+        return result + line_padding + "]";
+    }
+
+    template<typename T>
+    ndarray<T> ndarray<T>::transpose() {
+        auto t_shape{ m_shape.transpose() };
+        ndarray<T> t = numcpp<T>::empty(t_shape);
+
+        auto indicies{ std::vector<int>(m_shape.dimensions().size(), 0) };
+
+        for (int i = 0; i < m_shape.size(); i++) {
+            auto t_indicies{ std::vector<int>{ indicies } };
+            std::reverse(t_indicies.begin(), t_indicies.end());
+
+            int offset = t.m_shape.offset(t_indicies);
+            t.m_data[offset] = m_data[i];
+
+            m_shape.advance(indicies);
+        }
+
+        return t;
     }
 
     NUMCPP_EXPLICIT_INSTANTIATE_CLASS(ndarray);

@@ -1,7 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <numcpp/shape.h>
-#include <numcpp/numcpp.h>
+#include <numcpp.h>
 #include <vector>
 
 using nc = numcpp::numcpp<>;

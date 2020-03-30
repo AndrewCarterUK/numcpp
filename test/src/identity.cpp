@@ -1,11 +1,12 @@
 #include <catch2/catch.hpp>
 
-#include <numcpp/shape.h>
-#include <numcpp/numcpp.h>
+#include <numcpp.h>
 #include <vector>
 
+using nc = numcpp::numcpp<>;
+
 TEST_CASE( "numcpp::identity()", "numcpp::identity" ) {
-    auto a{ numcpp::numcpp<double>::identity(3) };
+    auto a{ nc::identity(3) };
 
     REQUIRE( a[0][0] == 1 );
     REQUIRE( a[0][1] == 0 );

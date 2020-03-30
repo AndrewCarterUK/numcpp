@@ -75,7 +75,7 @@ TEST_CASE( "numcpp::ndarray::as_string() scalar", "numcpp::ndarray" ) {
     REQUIRE( a.as_string() == "1.100000" );
 }
 
-/* TEST_CASE( "numcpp::ndarray::as_string() 1D", "numcpp::ndarray" ) {
+TEST_CASE( "numcpp::ndarray::as_string() 1D", "numcpp::ndarray" ) {
     double data[] = { 1.1, 2.2, 3.3 };
     numcpp::ndarray a{ data, numcpp::shape{ 3 }};
 
@@ -95,4 +95,22 @@ TEST_CASE( "numcpp::ndarray::as_string() 2D", "numcpp::ndarray" ) {
     };
 
     REQUIRE( a.as_string() == expected );
-} */
+}
+
+TEST_CASE( "numcpp::ndarray::transpose()", "numcpp::ndarray" ) {
+    int data[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    numcpp::ndarray<int> a{ data, numcpp::shape{ 1, 2, 4 }};
+
+    auto b{ a.transpose() };
+
+    REQUIRE( a.m_shape == b.m_shape.transpose() );
+
+    REQUIRE( a[0][0][0] == b[0][0][0] );
+    REQUIRE( a[0][0][1] == b[1][0][0] );
+    REQUIRE( a[0][0][2] == b[2][0][0] );
+    REQUIRE( a[0][0][3] == b[3][0][0] );
+    REQUIRE( a[0][1][0] == b[0][1][0] );
+    REQUIRE( a[0][1][1] == b[1][1][0] );
+    REQUIRE( a[0][1][2] == b[2][1][0] );
+    REQUIRE( a[0][1][3] == b[3][1][0] );
+}

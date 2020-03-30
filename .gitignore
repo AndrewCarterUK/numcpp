@@ -1,5 +1,13 @@
+# IDE Files
 .vscode
-obj/*.o
-test/obj/*.o
+
+# Compiler Files
+*.o
+*.a
+
+# Build Directories
 build/*
+!build/*/
 !build/.gitkeep
+build/examples/*
+!build/examples/.gitkeep
